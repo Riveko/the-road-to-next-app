@@ -1,11 +1,13 @@
 import { initialTickets } from "@/data";
 
-type TicketPageProps = Promise<{
-    ticketId: string;
-}>;
+type TicketPageProps = {
+    params: Promise<{
+        ticketId: string;
+    }>;
+};
 
-async function TicketPage(props: { params: TicketPageProps }) {
-    const { ticketId } = await props.params;
+const TicketPage = async ({ params }: TicketPageProps) => {
+    const { ticketId } = await params;
     const ticket = initialTickets.find((ticket) => ticket.id === ticketId);
 
     if (!ticket) {
